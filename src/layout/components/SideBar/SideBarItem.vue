@@ -2,23 +2,23 @@
   <div v-if="!item.hidden" class="menu-wrapper">
    <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
       <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-				<i :class="[onlyOneChild.meta.icon||(item.meta&&item.meta.icon), 'icon']"></i>
-				<template #title><span>{{onlyOneChild.meta.title}}</span></template>
+			<i :class="[onlyOneChild.meta.icon||(item.meta&&item.meta.icon), 'icon']"></i>
+			<template #title><span>{{onlyOneChild.meta.title}}</span></template>111
       </el-menu-item>
     </template>
     <el-submenu v-else ref="subMenu" :index="resolvePath(item.path)">
-			<template v-slot:title>
-				<i :class="[item.meta && item.meta.icon, 'icon']"></i>
-				<span>{{item.meta.title}}</span>
-			</template>
-      <sidebar-item
-        v-for="child in item.children"
-        :key="child.path"
-        :is-nest="true"
-        :item="child"
-        :base-path="resolvePath(child.path)"
-        class="nest-menu"
-      />
+		<template v-slot:title>
+			<i :class="[item.meta && item.meta.icon, 'icon']"></i>
+			<span>{{item.meta.title}}</span>
+		</template>
+		<sidebar-item
+			v-for="child in item.children"
+			:key="child.path"
+			:is-nest="true"
+			:item="child"
+			:base-path="resolvePath(child.path)"
+			class="nest-menu"
+		/>
     </el-submenu>
   </div>
 </template>
@@ -67,6 +67,7 @@ export default defineComponent({
 			return false;
 		};
 		const resolvePath = (routePath: any) => {
+			console.log('path', path, props.basePath, routePath, path.resolve(props.basePath, routePath));
 			return path.resolve(props.basePath, routePath);
 		};
 		return {
